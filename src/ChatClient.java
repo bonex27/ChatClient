@@ -69,12 +69,12 @@ public class ChatClient {
 
     private void run() throws IOException {
         try {
-            var socket = new Socket(serverAddress, 59001);
+            Socket socket = new Socket(serverAddress, 59001);
             in = new Scanner(socket.getInputStream());
             out = new PrintWriter(socket.getOutputStream(), true);
 
             while (in.hasNextLine()) {
-                var line = in.nextLine();
+                String line = in.nextLine();
                 if (line.startsWith("SUBMITNAME")) {
                     out.println(getName());
                 } else if (line.startsWith("NAMEACCEPTED")) {
@@ -95,7 +95,7 @@ public class ChatClient {
             System.err.println("Pass the server IP as the sole command line argument");
             return;
         }
-        var client = new ChatClient(args[0]);
+        ChatClient client = new ChatClient(args[0]);
         client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client.frame.setVisible(true);
         client.run();
